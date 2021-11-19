@@ -54,7 +54,7 @@ export default class PostList extends Vue {
 }
 .post_list-enter-active,
 .post_list-leave-active {
-  transition: all 0.6s ease;
+  transition: all 0.4s ease;
 }
 .post_list-enter-from,
 .post_list-leave-to {
@@ -63,5 +63,8 @@ export default class PostList extends Vue {
 }
 .post_list-move {
   transition: transform 0.8s ease;
+}
+.post_list-complete-leave-active {
+  position: absolute;
 }
 </style>
