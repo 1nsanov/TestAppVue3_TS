@@ -1,0 +1,49 @@
+<template>
+  <div class="search">
+    <my-input
+      class="input input-search"
+      v-model="searchQuery"
+      placeholder="Поиск постов"
+    />
+  </div>
+  <div class="app-btns">
+    <my-button class="btn create-btn" @click="showDialog"
+      >Создать пост</my-button
+    >
+    <my-select class="search" v-model:modelValue="selectedSort" :options="sortOption" />
+  </div>
+</template>
+
+<script lang="ts">
+import { Options, Vue } from "vue-class-component";
+import PostList from "@/components/PostList.vue";
+import Pagination from "@/components/Pagination.vue";
+import { Emit, Prop } from "vue-property-decorator";
+import Option from "@/types/Option";
+import { PropType } from "@vue/runtime-core";
+
+@Options({
+  components: { PostList, Pagination },
+  name: "PostsCoord",
+})
+export default class PostsCoord extends Vue {
+  @Prop({ type: String }) modelValueUpdate!: string;
+  @Prop({ type: String }) modelValueChange!: Option;
+  @Prop({ type: Array as PropType<Option[]>, default: () => [] })
+  options!: Option;
+  @Prop({ type: Boolean }) dialogVisible!: boolean;
+
+  @Emit("update:modelValueUpdate") updateInput(event: any) {
+    return event.target.value;
+  }
+  @Emit("update:modelValueChange") changeOption(event: any) {
+    return event.target.value;
+  }
+  @Emit("showDialog") showDialog() {
+    return this.dialogVisible;
+  }
+}
+</script>
+
+<style>
+</style>

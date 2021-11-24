@@ -24,7 +24,8 @@ import Option from "@/types/Option";
 })
 export default class MySelect extends Vue {
   @Prop({ type: String }) modelValue!: Option;
-  @Prop({ type: Array as PropType<Option[]>, default: () => [] }) options!: Option;
+  @Prop({ type: Array as PropType<Option[]>, default: () => [] })
+  options!: Option;
 
   @Emit("update:modelValue") changeOption(event: any) {
     return event.target.value;
