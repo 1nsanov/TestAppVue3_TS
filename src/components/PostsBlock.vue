@@ -2,8 +2,8 @@
   <post-list :posts="posts" @remove="removePost" v-if="!isPostLoading" />
   <pagination
     @changePage="changePage"
-    :countPages="countPages"
-    :currentPage="currentPage"
+    :countPages="GeneralPB.countPages"
+    :currentPage="GeneralPB.currentPage"
     v-if="posts.length != 0"
   />
 </template>
@@ -26,7 +26,9 @@ export default class PostsBlock extends Vue {
   // @Prop({ type: Number, required: true }) countPages!: number;
   // @Prop({ type: Number, required: true }) currentPage!: number;
 
-  @Prop({ type: Object as PropType<GeneralPB>, required: true }) GeneralPB: GeneralPB | undefined
+  @Prop({ type: Object as PropType<GeneralPB>, required: true })
+  GeneralPB!: GeneralPB;
+  @Prop({ type: Array as PropType<Post[]>, required: true }) posts!: Post[];
 
   @Emit("remove") removePost(post: Post) {
     return post;
@@ -38,5 +40,4 @@ export default class PostsBlock extends Vue {
 </script>
 
 <style scoped>
-
 </style>

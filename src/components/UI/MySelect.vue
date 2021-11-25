@@ -1,11 +1,5 @@
 <template>
-  <select
-    class="select"
-    name=""
-    id=""
-    v-model="modelValue"
-    @change="changeOption"
-  >
+  <select class="select" :value="modelValue" @change="changeOption">
     <option disabled selected value="">Сортировка</option>
     <option v-for="option in options" :key="option.value" :value="option.value">
       {{ option.name }}
@@ -26,10 +20,6 @@ export default class MySelect extends Vue {
   @Prop({ type: String }) modelValue!: Option;
   @Prop({ type: Array as PropType<Option[]>, default: () => [] })
   options!: Option;
-
-  @Emit("update:modelValue") changeOption(event: any) {
-    return event.target.value;
-  }
 }
 </script>
 

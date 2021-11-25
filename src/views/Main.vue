@@ -2,50 +2,22 @@
   <div class="main">
     <div class="container">
       <div class="content">
-        <div class="search">
-          <my-input
-            class="input input-search"
-            v-model="searchQuery"
-            placeholder="Поиск постов"
-          />
-        </div>
-        <div class="app-btns">
-          <my-button class="btn create-btn" @click="showDialog"
-            >Создать пост</my-button
-          >
-          <my-select
-            class="search"
-            v-model="selectedSort"
-            :options="sortOption"
-          />
-        </div>
-        <!-- <posts-coord
+        <posts-coord
           :options="sortOption"
-          v-model:modelValueUpdate="searchQuery"
-          v-model:modelValueChange="selectedSort"
+          v-model:modelValueInput="searchQuery"
+          v-model:modelValueSelect="selectedSort"
           @showDialog="showDialog"
-        /> -->
+        />
 
         <my-dialog v-model:show="dialogVisible">
           <post-form @create="createPost" />
         </my-dialog>
 
-        <!-- <post-list
-          :posts="slicePost"
-          @remove="removePost"
-          v-if="!isPostLoading"
-        />
-        <pagination
-          @changePage="changePage"
-          :countPages="countPages"
-          :currentPage="currentPage"
-          v-if="posts.length != 0"
-        /> -->
-
         <posts-block
           @remove="removePost"
           @changePage="changePage"
           :GeneralPB="GeneralPB"
+          :posts="slicePost"
         />
       </div>
     </div>
@@ -70,7 +42,6 @@ import axios from "axios";
 export default class App extends Vue {
   searchQuery = "";
   dialogVisible = false;
-
   isPostLoading = false;
   selectedSort: OptionType = "title";
   sortOption: Option[] = [
@@ -78,23 +49,27 @@ export default class App extends Vue {
     { value: "body", name: "По описанию" },
   ];
   pageSize = 4;
-
+  // currentPage = 1;
+  // countPages = 0;
   GeneralPB: GeneralPB = {
     countPages: 0,
     currentPage: 1,
-    posts: [],
   };
+  posts: Post[] = [];
 
-  // posts: Post[] = [];
-  // currentPage = 1;
-  // countPages = 0;
+  mounted() {
+    this.fetchPosts();
+    document.title="Test App: main"
+  }
+
+
   createPost(post: Post) {
-    this.GeneralPB.posts.push(post);
+    this.posts.push(post);
     this.dialogVisible = false;
     this.caclCountPages();
   }
   removePost(post: Post) {
-    this.GeneralPB.posts = this.GeneralPB.posts.filter((p) => p.id !== post.id);
+    this.posts = this.posts.filter((p) => p.id !== post.id);
     this.caclCountPages();
   }
   showDialog() {
@@ -107,8 +82,9 @@ export default class App extends Vue {
         const response = await axios.get(
           "https://jsonplaceholder.typicode.com/posts?_limit=15"
         );
-        this.GeneralPB.posts = response.data;
+        this.posts = response.data;
         this.caclCountPages();
+        console.log("Success");
       }, 10);
     } catch (e) {
       alert("Wrong!!!");
@@ -117,12 +93,9 @@ export default class App extends Vue {
     }
   }
 
-  mounted() {
-    this.fetchPosts();
-  }
 
   get sortedPosts() {
-    return [...this.GeneralPB.posts].sort((post1: Post, post2: Post) =>
+    return [...this.posts].sort((post1: Post, post2: Post) =>
       post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
     );
   }
@@ -144,9 +117,7 @@ export default class App extends Vue {
   }
 
   caclCountPages() {
-    this.GeneralPB.countPages = Math.ceil(
-      this.GeneralPB.posts.length / this.pageSize
-    );
+    this.GeneralPB.countPages = Math.ceil(this.posts.length / this.pageSize);
   }
 }
 </script>

@@ -2,7 +2,7 @@
   <div class="search">
     <my-input
       class="input input-search"
-      v-model="searchQuery"
+      @input="updateInput"
       placeholder="Поиск постов"
     />
   </div>
@@ -10,7 +10,12 @@
     <my-button class="btn create-btn" @click="showDialog"
       >Создать пост</my-button
     >
-    <my-select class="search" v-model:modelValue="selectedSort" :options="sortOption" />
+    <my-select
+      class="search"
+      @change="changeOption"
+      :options="options"
+      v-model="modelValueSelect"
+    />
   </div>
 </template>
 
@@ -27,20 +32,23 @@ import { PropType } from "@vue/runtime-core";
   name: "PostsCoord",
 })
 export default class PostsCoord extends Vue {
-  @Prop({ type: String }) modelValueUpdate!: string;
-  @Prop({ type: String }) modelValueChange!: Option;
+  @Prop({ type: String }) modelValueInput!: string;
+  @Prop({ type: String }) modelValueSelect!: Option;
   @Prop({ type: Array as PropType<Option[]>, default: () => [] })
   options!: Option;
   @Prop({ type: Boolean }) dialogVisible!: boolean;
 
-  @Emit("update:modelValueUpdate") updateInput(event: any) {
+  @Emit("update:modelValueInput") updateInput(event: any) {
     return event.target.value;
   }
-  @Emit("update:modelValueChange") changeOption(event: any) {
+  @Emit("update:modelValueSelect") changeOption(event: any) {
     return event.target.value;
   }
   @Emit("showDialog") showDialog() {
     return this.dialogVisible;
+  }
+  mounted() {
+    console.log("modelValueSelect", this.modelValueSelect);
   }
 }
 </script>
