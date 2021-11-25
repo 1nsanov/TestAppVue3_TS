@@ -20,10 +20,8 @@ export default class my {
   theme = true;
   getTheme() {
     if (this.theme) {
-      console.log(this.darkTheme);
       return this.darkTheme
     }
-    console.log(this.lightTheme);
     return this.lightTheme
   }
   changeTheme() {

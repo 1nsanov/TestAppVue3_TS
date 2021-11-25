@@ -22,10 +22,6 @@ import { PropType } from "@vue/runtime-core";
   name: "PostsBlock",
 })
 export default class PostsBlock extends Vue {
-  // @Prop({ type: Array as PropType<Post[]>, required: true }) posts!: Post[];
-  // @Prop({ type: Number, required: true }) countPages!: number;
-  // @Prop({ type: Number, required: true }) currentPage!: number;
-
   @Prop({ type: Object as PropType<GeneralPB>, required: true })
   GeneralPB!: GeneralPB;
   @Prop({ type: Array as PropType<Post[]>, required: true }) posts!: Post[];

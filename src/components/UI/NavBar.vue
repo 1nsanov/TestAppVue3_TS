@@ -8,34 +8,34 @@
             <a href="#" class="menu__link" @click="$router.push('/home')">Главная</a>
           </li>
           <li class="menu__item">
-            <a href="#" class="menu__link" @click="$router.push('/main')"
-              >Посты</a
-            >
+            <a href="#" class="menu__link" @click="$router.push('/main')">Посты</a>
           </li>
           <li class="menu__item">
-            <a href="#" class="menu__link" @click="$router.push('/about')"
-              >О нас</a
-            >
+            <a href="#" class="menu__link" @click="$router.push('/about')">О нас</a>
           </li>
         </ul>
       </nav>
     </div>
-    
   </header>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import { Prop } from "vue-property-decorator";
 
 @Options({
   name: "NavBar",
 })
-export default class NavBar extends Vue {}
+export default class NavBar extends Vue {
+  @Prop() localization: any;
+  mounted(){
+    console.log('NavBar', this.localization);
+  }
+}
 </script>
 
 
 <style scoped>
-
 .header__contanier {
   display: flex;
   min-height: 65px;
