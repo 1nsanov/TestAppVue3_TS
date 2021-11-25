@@ -105,6 +105,7 @@ export default class Pagination extends Vue {
   justify-content: center;
 }
 .page {
+  color: #fff;
   background: rgb(26, 103, 167);
   border-radius: 10px;
   padding: 10px 15px;

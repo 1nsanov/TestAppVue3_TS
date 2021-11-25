@@ -49,8 +49,6 @@ export default class App extends Vue {
     { value: "body", name: "По описанию" },
   ];
   pageSize = 4;
-  // currentPage = 1;
-  // countPages = 0;
   GeneralPB: GeneralPB = {
     countPages: 0,
     currentPage: 1,
@@ -59,9 +57,9 @@ export default class App extends Vue {
 
   mounted() {
     this.fetchPosts();
-    document.title="Test App: main"
+    document.title = "Test App: main";
+    this.$my.changeTitle("Posts");
   }
-
 
   createPost(post: Post) {
     this.posts.push(post);
@@ -93,7 +91,6 @@ export default class App extends Vue {
     }
   }
 
-
   get sortedPosts() {
     return [...this.posts].sort((post1: Post, post2: Post) =>
       post1[this.selectedSort]?.localeCompare(post2[this.selectedSort])
@@ -119,8 +116,11 @@ export default class App extends Vue {
   caclCountPages() {
     this.GeneralPB.countPages = Math.ceil(this.posts.length / this.pageSize);
   }
+
+  
 }
 </script>
 
 <style>
+
 </style>

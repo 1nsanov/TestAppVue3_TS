@@ -5,7 +5,7 @@
       <nav class="header__menu menu">
         <ul class="menu__list">
           <li class="menu__item">
-            <a href="" class="menu__link" @click="$router.push('/')">Главная</a>
+            <a href="#" class="menu__link" @click="$router.push('/home')">Главная</a>
           </li>
           <li class="menu__item">
             <a href="#" class="menu__link" @click="$router.push('/main')"
@@ -20,6 +20,7 @@
         </ul>
       </nav>
     </div>
+    
   </header>
 </template>
 
@@ -34,17 +35,6 @@ export default class NavBar extends Vue {}
 
 
 <style scoped>
-.header {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: rgb(83, 146, 218);
-  color: rgb(22, 22, 22);
-  align-items: center;
-  z-index: 10;
-}
 
 .header__contanier {
   display: flex;

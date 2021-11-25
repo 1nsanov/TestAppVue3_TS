@@ -36,13 +36,6 @@ export default class PostList extends Vue {
 </script>
 
 <style scoped>
-.post {
-  margin: 15px 0px;
-  padding: 15px;
-  border-radius: 5px;
-  background: #fff;
-  color: #413c3c;
-}
 .title {
   display: block;
   margin: 20px 0 0 0;

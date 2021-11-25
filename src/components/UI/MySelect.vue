@@ -10,7 +10,7 @@
 <script lang="ts">
 import { PropType } from "@vue/runtime-core";
 import { Options, Vue } from "vue-class-component";
-import { Emit, Prop } from "vue-property-decorator";
+import { Prop } from "vue-property-decorator";
 import Option from "@/types/Option";
 
 @Options({

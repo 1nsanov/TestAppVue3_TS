@@ -5,7 +5,7 @@ import About from '../views/About.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: { title: 'tre1' }
@@ -30,6 +30,7 @@ const router = createRouter({
 })
 router.beforeEach((to, from, next) => {
   document.title = to.meta.title as string
+  next();
 })
 
 export default router

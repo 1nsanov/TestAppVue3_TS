@@ -4,6 +4,7 @@ import MyInput from "@/components/UI/MyInput.vue";
 import MyDialog from "@/components/UI/MyDialog.vue";
 import MySelect from "@/components/UI/MySelect.vue";
 import NavBar from "@/components/UI/NavBar.vue";
+import ChangeThemeBtn from "@/components/UI/ChangeThemeBtn.vue"
 
 export default (app: App<Element>) => {
 	app.component('MyButton', MyButton)
@@ -11,4 +12,5 @@ export default (app: App<Element>) => {
 	app.component('MyDialog', MyDialog)
 	app.component('MySelect', MySelect)
 	app.component('NavBar', NavBar)
+	app.component('ChangeThemeBtn', ChangeThemeBtn)
 }

@@ -79,12 +79,6 @@ export default class PostItem extends Vue {
 </script>
 
 <style scoped>
-.post {
-  padding: 15px;
-  border-radius: 5px;
-  background: #fff;
-  color: #413c3c;
-}
 .post__interface {
   margin: 10px 0 0 0;
   display: flex;
