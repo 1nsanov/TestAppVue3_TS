@@ -17,7 +17,7 @@ export default class ChangeLanguage extends Vue {
 
 <style scoped>
 .lang {
-  position: absolute;
+  position: relative;
   height: 52px;
   width: 52px;
   padding: 6px;
@@ -29,17 +29,15 @@ export default class ChangeLanguage extends Vue {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  float: right;
-  margin-top: -80px;
-  margin-left: 75px;
+  line-height: 65px;
   user-select: none;
   transition: 0.5s;
+  float: right;
+  margin: -82px 7px 0 0;
 }
 .lang:hover {
   height: 45px;
   width: 45px;
   font-size: 23px;
-  margin-top: -77px;
-  margin-left: 77px;
 }
 </style>

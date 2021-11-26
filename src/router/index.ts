@@ -2,25 +2,32 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import About from '../views/About.vue'
+import Table from '../views/Table.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: { title: 'tre1' }
+    meta: { title: 'home' }
   },
   {
     path: '/main',
     name: 'Main',
     component: Main,
-    meta: { title: 'tre2' }
+    meta: { title: 'main' }
   },
   {
     path: '/about',
     name: 'About',
     component: About,
-    meta: { title: 'tre3' }
+    meta: { title: 'about' }
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: Table,
+    meta: { title: 'table' }
   },
 ]
 

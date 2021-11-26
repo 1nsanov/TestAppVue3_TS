@@ -117,6 +117,7 @@ export default class Pagination extends Vue {
   margin: 0 3px 15px 3px;
   cursor: pointer;
   transition: 0.5s;
+  user-select: none;
 }
 .page:hover {
   color: rgb(26, 103, 167);

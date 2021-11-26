@@ -3,7 +3,7 @@
     <NavBar />
     <div class="app">
       <change-theme-btn @click="onClickChangeTheme()" />
-      <change-language/>
+      <change-language @click="switchLang()" />
       <router-view />
     </div>
   </div>
@@ -16,7 +16,6 @@ import { Options, Vue } from "vue-class-component";
   name: "App",
 })
 export default class App extends Vue {
-  //Смена тем
   styles = {};
   onClickChangeTheme() {
     this.styles = {
@@ -31,34 +30,9 @@ export default class App extends Vue {
     this.onClickChangeTheme();
   }
 
-  // Локализцаия
-  localization = {};
-  langRu = true;
-  langEn = false;
-  getLocalization() {
-    this.switchLang();
-    this.localization = {
-      home: this.localizations()?.header.home,
-      posts: this.localizations()?.header.posts,
-      about: this.localizations()?.header.about,
-    };
-    console.log("localization", this.localization);
-  }
-
-  localizations() {
-    if (this.langRu) {
-      return this.$localizationRU;
-    } else if (this.langEn) {
-      return this.$localizationEN;
-    }
-  }
   switchLang() {
-    this.langRu = !this.langRu;
-    this.langEn = !this.langEn;
-  }
-
-  mounted() {
-    this.getLocalization();
+    console.log(this.$localization.default);
+    this.$localization.switchLang();
   }
 }
 </script>
@@ -67,14 +41,13 @@ export default class App extends Vue {
 body {
   font-size: 24px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-  
 }
 .wrapper {
   background: var(--main-bg-color);
   color: var(--main-text-color);
   width: 100%;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   transition: 0.5s;
 }
 .post {
@@ -107,10 +80,17 @@ body {
   z-index: 10;
   transition: 0.5s;
 }
+.table__item {
+  background: var(--post-bg-color);
+  color: var(--post-text-color);
+}
+.dialoge__content {
+  background: var(--main-bg-color);
+}
 .container {
-  max-width: 750px;
+  max-width: 1200px;
   margin: 0px auto;
-  padding: 0 75px;
+  padding: 0 70px;
 }
 .content {
   margin: 95px 0 0 0;

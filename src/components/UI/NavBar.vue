@@ -5,13 +5,24 @@
       <nav class="header__menu menu">
         <ul class="menu__list">
           <li class="menu__item">
-            <a href="#" class="menu__link" @click="$router.push('/home')">Главная</a>
+            <a href="#" class="menu__link" @click="$router.push('/home')">{{
+              $localization.default.header.home
+            }}</a>
           </li>
           <li class="menu__item">
-            <a href="#" class="menu__link" @click="$router.push('/main')">Посты</a>
+            <a href="#" class="menu__link" @click="$router.push('/main')"
+              >Посты</a
+            >
           </li>
           <li class="menu__item">
-            <a href="#" class="menu__link" @click="$router.push('/about')">О нас</a>
+            <a href="#" class="menu__link" @click="$router.push('/table')"
+              >Таблица</a
+            >
+          </li>
+          <li class="menu__item">
+            <a href="#" class="menu__link" @click="$router.push('/about')"
+              >О нас</a
+            >
           </li>
         </ul>
       </nav>
@@ -20,18 +31,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+import { Vue, Options } from "vue-property-decorator";
 
 @Options({
   name: "NavBar",
 })
-export default class NavBar extends Vue {
-  @Prop() localization: any;
-  mounted(){
-    console.log('NavBar', this.localization);
-  }
-}
+export default class NavBar extends Vue {}
 </script>
 
 
@@ -66,7 +71,7 @@ export default class NavBar extends Vue {
   line-height: 65px;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 554px) {
   .header__logo {
     font-size: 24px;
   }
@@ -77,15 +82,26 @@ export default class NavBar extends Vue {
     margin: 0 15px 0 0;
   }
 }
-@media (max-width: 359px) {
+@media (max-width: 424px) {
   .header__logo {
-    font-size: 22px;
+    font-size: 20px;
   }
   .menu__link {
-    font-size: 14px;
+    font-size: 12px;
   }
   .menu__item:not(:last-child) {
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 0;
+  }
+}
+@media (max-width: 360px) {
+  .header__logo {
+    font-size: 16px;
+  }
+  .menu__link {
+    font-size: 12px;
+  }
+  .menu__item:not(:last-child) {
+    margin: 0 5px 0 0;
   }
 }
 </style>

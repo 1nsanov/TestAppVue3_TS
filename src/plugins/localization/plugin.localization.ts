@@ -1,26 +1,18 @@
 import { App } from "vue";
-import LocalizationRU from "./localizationRU";
-import LocalizationEN from "./localizationEN"
+import LocalizationDefault from "./localizationDefault";
 
 declare module "@vue/runtime-core" {
   export interface ComponentCustomProperties {
-    $localizationRU: LocalizationRU;
-    $localizationEN: LocalizationEN;
+    $localization: LocalizationDefault;
   }
 }
 const install = (app: App) => {
-  const localizationRU = new LocalizationRU();
-  app.config.globalProperties.$localizationRU = localizationRU;
-
-  const localizationEN = new LocalizationEN();
-  app.config.globalProperties.$localizationEN = localizationEN;
+  const localization = new LocalizationDefault();
+  app.config.globalProperties.$localization = localization;
 };
 
-const localizationRU = {
-  install,
-};
-const localizationEN = {
+const localization = {
   install,
 };
 
-export default localizationRU;
+export default localization;

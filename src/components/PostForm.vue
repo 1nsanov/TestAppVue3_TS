@@ -41,6 +41,5 @@ export default class PostForm extends Vue {
 .header-text {
   font-size: 32px;
   font-weight: bold;
-  color: #413c3c;
 }
 </style>

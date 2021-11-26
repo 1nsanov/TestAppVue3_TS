@@ -17,7 +17,7 @@ export default class Theme extends Vue {
 
 <style scoped>
 .theme {
-  position: absolute;
+  position: fixed;
   height: 52px;
   width: 52px;
   padding: 6px;
@@ -29,16 +29,15 @@ export default class Theme extends Vue {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  margin-top: -80px;
-  margin-left: 10px;
+  line-height: 65px;
   user-select: none;
   transition: 0.5s;
+  float: left;
+  margin: -82px 0px 0px 7px;
 }
 .theme:hover {
   height: 45px;
   width: 45px;
   font-size: 23px;
-  margin-top: -77px;
-  margin-left: 13px;
 }
 </style>

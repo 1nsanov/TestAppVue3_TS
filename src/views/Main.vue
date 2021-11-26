@@ -116,8 +116,6 @@ export default class App extends Vue {
   caclCountPages() {
     this.GeneralPB.countPages = Math.ceil(this.posts.length / this.pageSize);
   }
-
-  
 }
 </script>
 
