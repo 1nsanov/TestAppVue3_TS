@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper" :style="styles">
-    <NavBar />
-    <div class="app">
-      <change-theme-btn @click="onClickChangeTheme()" />
-      <change-language @click="switchLang()" />
+    <NavBar @changeTheme="onClickChangeTheme"  @changeLang="switchLang"/>
+    <div class="app" >
+      <!-- <change-theme-btn @click="onClickChangeTheme()" />
+      <change-language @click="switchLang()" /> -->
       <router-view />
     </div>
   </div>
@@ -17,6 +17,7 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class App extends Vue {
   styles = {};
+
   onClickChangeTheme() {
     this.styles = {
       "--main-bg-color": this.$my.getTheme().mainBgColor,
@@ -31,16 +32,28 @@ export default class App extends Vue {
   }
 
   switchLang() {
-    console.log(this.$localization.default);
-    this.$localization.switchLang();
+    this.$localization.state.switchLang();
   }
 }
 </script>
 
 <style lang="less">
+.app {
+  .tirscript-button {
+    border-radius: 20px;
+    margin: 0;
+  }
+  .tirscript-input {
+    margin: 10px 0;
+    .form-control {
+      border-radius: 10px;
+    }
+  }
+}
 body {
   font-size: 24px;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  // font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
 }
 .wrapper {
   background: var(--main-bg-color);
@@ -49,6 +62,7 @@ body {
   height: 100vh;
   overflow: auto;
   transition: 0.5s;
+  padding: 0px auto;
 }
 .post {
   margin: 15px 0px;
@@ -88,9 +102,9 @@ body {
   background: var(--main-bg-color);
 }
 .container {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0px auto;
-  padding: 0 70px;
+  padding: 0 15px;
 }
 .content {
   margin: 95px 0 0 0;
@@ -111,4 +125,44 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+@TirscriptDropdownColor: #162a47;
+.ui-select {
+  background: @TirscriptDropdownColor;
+  height: 40px;
+  width: 100px;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.default {
+  color: #fff;
+}
+.selected {
+  color: rgb(244, 255, 194);
+}
+.cut {
+  color: #fff;
+}
+.ui-select {
+  width: 100px;
+}
+
+// @media screen and (max-width: 991px) {
+//   /* стили для больших планшетов - начало */
+
+// }
+@media screen and (max-width: 479px) {
+  /* стили для телефонов - начало */
+}
+// @media (max-width: 360px) {
+//   .header__logo {
+//     font-size: 16px;
+//   }
+//   .menu__link {
+//     font-size: 12px;
+//   }
+//   .menu__item:not(:last-child) {
+//     margin: 0 5px 0 0;
+//   }
+// }
 </style>

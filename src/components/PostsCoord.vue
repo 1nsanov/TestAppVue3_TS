@@ -7,9 +7,9 @@
     />
   </div>
   <div class="app-btns">
-    <my-button class="btn create-btn" @click="showDialog"
-      >Создать пост</my-button
-    >
+    <my-button class="btn create-btn" @click="showDialog">{{
+      $localization.state.default.posts.createPost
+    }}</my-button>
     <my-select
       class="search"
       @change="changeOption"
@@ -46,9 +46,6 @@ export default class PostsCoord extends Vue {
   }
   @Emit("showDialog") showDialog() {
     return this.dialogVisible;
-  }
-  mounted() {
-    console.log("modelValueSelect", this.modelValueSelect);
   }
 }
 </script>

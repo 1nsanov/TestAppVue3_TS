@@ -31,12 +31,4 @@ export default class my {
   changeTitle(title: string) {
     console.log(title);
   }
-
-  getColor(): string {
-    return "#cc1"
-  }
-  // initVariables() {
-  //   (document.body as any).style = "--main-bg-color: #1a1a22ef; --main-text-color: #fff";
-  //   // (document.body as any).style = "--main-text-color: #fff";
-  // }
 }

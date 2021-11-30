@@ -2,13 +2,35 @@
   <form action="" @submit.prevent>
     <h1 class="header-text" v-if="change == false">Записать человека</h1>
     <h1 class="header-text" v-else>Изменить</h1>
-    <my-input class="input-peoples" placeholder="Имя" v-model="people.name" />
+    <my-input
+      class="input-peoples"
+      placeholder="Имя"
+      v-model="people.name"
+      minLength="2"
+    />
     <br />
     <my-input
       type="number"
       class="input-peoples"
       placeholder="Возраст"
       v-model="people.age"
+      minLength="2"
+    />
+    <br />
+    <my-input
+      class="input-peoples"
+      placeholder="Должность"
+      v-model="people.position"
+      minLength="3"
+    />
+    <br />
+    <my-input
+      type="tel"
+      class="input-peoples"
+      placeholder="373-000-00000"
+      v-model="people.telnumber"
+      pattern="373-[0-9]{3}-[0-9]{5}"
+      minLength="13"
     />
     <br />
     <my-button
@@ -25,16 +47,22 @@
 
 <script lang="ts">
 import People from "@/types/People";
-import { Options, Vue } from "vue-class-component";
-import { Emit, Prop } from "vue-property-decorator";
+
+import { Emit, Prop, Vue, Options } from "vue-property-decorator";
 
 @Options({
   name: "TableForm",
 })
 export default class TableForm extends Vue {
   @Prop({ type: Boolean }) change!: boolean;
-  people: People = { number: 0, id: "", name: "", age: 0 };
-  @Prop() peoples!: People[]
+  people: People = {
+    id: "",
+    name: "",
+    age: 18,
+    position: "",
+    telnumber: "373-000-00000",
+  };
+  @Prop() peoples!: People[];
 
   @Emit("createPeople") createPeople() {
     this.people.id = Date.now().toString();
@@ -42,7 +70,6 @@ export default class TableForm extends Vue {
   }
   @Emit("changePeople") changePeople() {
     this.people.id = Date.now().toString();
-    this.people.number = this.peoples.length + 1;
     return Object.assign({}, this.people);
   }
 }

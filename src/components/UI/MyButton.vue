@@ -16,16 +16,17 @@ export default class MyButton extends Vue {}
 
 <style scoped>
 .btn {
+  font-weight: 600;
   font-size: 18px;
   padding: 5px 20px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: rgb(255, 255, 255);
-  background: rgb(140, 190, 23);
+  background: rgb(14, 114, 207);
   cursor: pointer;
   transition: 0.5s;
 }
 .create-btn {
-  background: rgb(13, 180, 221);
+  background: rgb(89, 189, 22);
   margin: 10px 10px 0 0;
 }
 .create-btn:hover {

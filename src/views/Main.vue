@@ -34,6 +34,7 @@ import PostsBlock from "@/components/PostsBlock.vue";
 import PostsCoord from "@/components/PostsCoord.vue";
 import GeneralPB from "@/types/GeneralPB";
 import axios from "axios";
+import { Watch } from "vue-property-decorator";
 
 @Options({
   components: { PostForm, PostsBlock, PostsCoord },
@@ -54,6 +55,13 @@ export default class App extends Vue {
     currentPage: 1,
   };
   posts: Post[] = [];
+
+  @Watch("GeneralPB", { deep: true })
+  controlCurPage() {
+    if (this.GeneralPB.currentPage > this.GeneralPB.countPages) {
+      this.GeneralPB.currentPage--;
+    }
+  }
 
   mounted() {
     this.fetchPosts();
@@ -82,7 +90,6 @@ export default class App extends Vue {
         );
         this.posts = response.data;
         this.caclCountPages();
-        console.log("Success");
       }, 10);
     } catch (e) {
       alert("Wrong!!!");
@@ -120,5 +127,4 @@ export default class App extends Vue {
 </script>
 
 <style>
-
 </style>

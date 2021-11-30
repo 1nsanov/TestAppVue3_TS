@@ -1,5 +1,5 @@
 <template>
-  <div class="page__wrapper">
+  <div class="page__wrapper" v-if="this.countPages != 0">
     <div
       class="page-arrow"
       @click="prevPage"
@@ -19,6 +19,7 @@
     >
       {{ countPage }}
     </div>
+
     <div
       class="page-arrow"
       :class="{
@@ -70,6 +71,15 @@ export default class Pagination extends Vue {
     }
   }
 
+  @Watch("countPages")
+  controlCurrent() {
+    if (this.countPages < this.showPages[2]) {
+      this.prevPage();
+    }
+    if (this.currentPage > this.countPages) {
+    }
+  }
+
   mounted() {
     this.createPageList();
   }
@@ -106,14 +116,15 @@ export default class Pagination extends Vue {
 }
 .page {
   color: #fff;
+  font-weight: 700;
   background: rgb(26, 103, 167);
-  border-radius: 10px;
-  padding: 10px 15px;
-  font-size: 16px;
+  border-radius: 5px;
+  width: 35px;
+  height: 35px;
+  font-size: 20px;
   display: flex;
-  text-align: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
   margin: 0 3px 15px 3px;
   cursor: pointer;
   transition: 0.5s;
@@ -125,26 +136,25 @@ export default class Pagination extends Vue {
   outline: 1px solid rgb(26, 103, 167);
 }
 .current-page {
-  outline: 2px solid rgb(30, 212, 39);
-  font-size: 16px;
+  outline: 1.5px solid rgb(30, 212, 39);
 }
 
 .page-block {
   background: rgb(70, 70, 70);
   color: rgb(168, 168, 168);
-  border-radius: 10px;
-  padding: 10px 15px;
-  font-size: 16px;
+  border-radius: 5px;
   display: flex;
-  text-align: center;
   align-items: center;
-  text-align: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
   margin: 0 3px 15px 3px;
   cursor: default;
 }
 .page-arrow {
-  padding: 5px 8px;
   margin-left: 12px;
   margin-right: 12px;
+  width: 25px;
+  font-size: 18px;
 }
 </style>

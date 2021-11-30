@@ -6,6 +6,7 @@ import MySelect from "@/components/UI/MySelect.vue";
 import NavBar from "@/components/UI/NavBar.vue";
 import ChangeThemeBtn from "@/components/UI/ChangeThemeBtn.vue"
 import ChangeLanguage from "@/components/UI/ChangeLanguage.vue"
+import ToggleSwitch from "@/components/UI/ToggleSwitch.vue"
 
 export default (app: App<Element>) => {
 	app.component('MyButton', MyButton)
@@ -15,4 +16,5 @@ export default (app: App<Element>) => {
 	app.component('NavBar', NavBar)
 	app.component('ChangeThemeBtn', ChangeThemeBtn)
 	app.component('ChangeLanguage', ChangeLanguage)
+	app.component('ToggleSwitch', ToggleSwitch)
 }

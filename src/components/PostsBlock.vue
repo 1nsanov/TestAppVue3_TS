@@ -1,10 +1,9 @@
 <template>
-  <post-list :posts="posts" @remove="removePost" v-if="!isPostLoading" />
+  <post-list :posts="posts" @remove="removePost"/>
   <pagination
     @changePage="changePage"
     :countPages="GeneralPB.countPages"
     :currentPage="GeneralPB.currentPage"
-    v-if="posts.length != 0"
   />
 </template>
 

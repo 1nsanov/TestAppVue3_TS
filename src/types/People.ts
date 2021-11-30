@@ -1,8 +1,9 @@
 interface People {
-  number: number
   id: string,
   name: string,
   age: number,
+  position: string,
+  telnumber: string,
 }
 
 export default People

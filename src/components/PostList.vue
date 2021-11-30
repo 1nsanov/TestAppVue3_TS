@@ -1,14 +1,12 @@
 <template>
   <div v-if="posts.length > 0">
-    <span class="title">Список постов</span>
-    <transition-group name="post_list">
-      <post-item
-        v-for="post in posts"
-        :key="post.id"
-        :post="post"
-        @remove="removePost"
-      />
-    </transition-group>
+    <span class="title">{{ $localization.state.default.posts.listPost }}</span>
+    <post-item
+      v-for="post in posts"
+      :key="post.id"
+      :post="post"
+      @remove="removePost"
+    />
   </div>
   <div v-else>
     <span class="title">Список постов пуст.</span>
@@ -44,20 +42,5 @@ export default class PostList extends Vue {
 .post_list-item {
   display: inline-block;
   margin-right: 10px;
-}
-.post_list-enter-active,
-.post_list-leave-active {
-  transition: all 0.4s ease;
-}
-.post_list-enter-from,
-.post_list-leave-to {
-  opacity: 0;
-  transform: translateX(200px);
-}
-.post_list-move {
-  transition: transform 0.8s ease;
-}
-.post_list-complete-leave-active {
-  position: absolute;
 }
 </style>

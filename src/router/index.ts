@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import About from '../views/About.vue'
 import Table from '../views/Table.vue'
+import TableFormRout from '../components/TableFormRout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,6 +29,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'Table',
     component: Table,
     meta: { title: 'table' }
+  },
+  {
+    path: '/tableform',
+    name: 'TableFormRout',
+    component: TableFormRout,
+    meta: { title: 'tableform' }
   },
 ]
 

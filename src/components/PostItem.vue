@@ -1,11 +1,19 @@
 <template>
   <div class="post">
     <div>
-      <div><strong>Название: </strong>{{ post.title }}</div>
-      <div><strong>Описание: </strong>{{ post.body }}</div>
+      <div>
+        <strong>{{ $localization.state.default.posts.post.titlePost }}: </strong
+        >{{ post.title }}
+      </div>
+      <div>
+        <strong>{{ $localization.state.default.posts.post.bodyPost }}: </strong
+        >{{ post.body }}
+      </div>
     </div>
     <div class="post__interface">
-      <my-button class="btn delete-btn" @click="removePost">Удалить</my-button>
+      <my-button class="btn delete-btn" @click="removePost">{{
+        $localization.state.default.posts.post.delete
+      }}</my-button>
       <div class="post__interface__reaction">
         <div class="reaction like">
           <img

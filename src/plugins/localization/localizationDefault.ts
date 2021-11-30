@@ -4,6 +4,9 @@ export default class localizationDefault {
   langRu = true;
   langEn = false;
   default = new localizationRU()
+  Ru = 'Русский'
+  En = 'English'
+  private Default = 'Русский'
 
   constructor() {
     Object.assign(this, this.default);
@@ -12,8 +15,6 @@ export default class localizationDefault {
   switchState() {
     this.langRu = !this.langRu;
     this.langEn = !this.langEn;
-    console.log('RU', !this.langRu);
-    console.log('EN', !this.langEn);
   }
 
   switchLang() {

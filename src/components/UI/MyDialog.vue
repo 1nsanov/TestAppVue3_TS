@@ -31,11 +31,12 @@ export default class MyDialog extends Vue {
   position: fixed;
   display: flex;
   z-index: 1;
+  padding: 0px auto;
 }
 .dialoge__content {
   padding: 10px 20px;
   margin: auto;
-  max-height: 180px;
+  max-height: auto;
   min-width: 350px;
   max-width: 350px;
   border-radius: 10px;

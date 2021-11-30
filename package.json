@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "set-registry": "npm set registry http://194.28.112.20:4873/"
   },
   "dependencies": {
     "axios": "^0.24.0",
@@ -15,6 +16,12 @@
     "prettier": "2.3.2",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "tirscript3-button": "^1.0.5",
+    "tirscript3-component-models": "^1.0.2",
+    "tirscript3-components": "^1.0.8",
+    "tirscript3-date-picker": "^1.0.6",
+    "tirscript3-dropdown": "^1.0.8",
+    "tirscript3-input": "^1.0.6",
     "vue": "3.2.19",
     "vue-class-component": "^8.0.0-0",
     "vue-property-decorator": "^10.0.0-rc.3",
