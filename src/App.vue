@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper" :style="styles">
-    <NavBar @changeTheme="onClickChangeTheme"  @changeLang="switchLang"/>
-    <div class="app" >
-      <!-- <change-theme-btn @click="onClickChangeTheme()" />
-      <change-language @click="switchLang()" /> -->
+    <NavBar
+      @changeTheme="onClickChangeTheme"
+    />
+    <div class="app">
       <router-view />
     </div>
   </div>
@@ -17,7 +17,6 @@ import { Options, Vue } from "vue-class-component";
 })
 export default class App extends Vue {
   styles = {};
-
   onClickChangeTheme() {
     this.styles = {
       "--main-bg-color": this.$my.getTheme().mainBgColor,
@@ -29,10 +28,6 @@ export default class App extends Vue {
   }
   beforeMount() {
     this.onClickChangeTheme();
-  }
-
-  switchLang() {
-    this.$localization.state.switchLang();
   }
 }
 </script>
@@ -54,6 +49,11 @@ body {
   font-size: 24px;
   // font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-family: "Source Sans Pro", sans-serif;
+}
+.container {
+  max-width: 1300px;
+  margin: 0px auto;
+  padding: 0 15px;
 }
 .wrapper {
   background: var(--main-bg-color);
@@ -101,11 +101,7 @@ body {
 .dialoge__content {
   background: var(--main-bg-color);
 }
-.container {
-  max-width: 1300px;
-  margin: 0px auto;
-  padding: 0 15px;
-}
+
 .content {
   margin: 95px 0 0 0;
 }
@@ -151,18 +147,7 @@ body {
 //   /* стили для больших планшетов - начало */
 
 // }
-@media screen and (max-width: 479px) {
-  /* стили для телефонов - начало */
-}
-// @media (max-width: 360px) {
-//   .header__logo {
-//     font-size: 16px;
-//   }
-//   .menu__link {
-//     font-size: 12px;
-//   }
-//   .menu__item:not(:last-child) {
-//     margin: 0 5px 0 0;
-//   }
+// @media screen and (max-width: 479px) {
+//   /* стили для телефонов - начало */
 // }
 </style>

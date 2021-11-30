@@ -224,7 +224,7 @@ export default class Table extends Vue {
   border-radius: 3px;
   overflow-x: hidden;
   user-select: none;
-  min-width: 1100px;
+  min-width: 990px;
 }
 .table-scroll {
   overflow-x: auto;

@@ -15,7 +15,8 @@
       @change="changeOption"
       :options="options"
       v-model="modelValueSelect"
-    />
+      >{{ $localization.state.default.posts.sort }}</my-select
+    >
   </div>
 </template>
 

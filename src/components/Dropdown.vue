@@ -1,14 +1,32 @@
 <template>
   <div class="dropdown" v-if="stateDropdown">
-    <div class="dropdown__title">Menu</div>
+    <div class="dropdown__title">
+      {{ $localization.state.default.dropdown.menu }}
+    </div>
     <div class="dropdown__menu">
       <div class="dropdown__menu_item">
-        <span><i class="fas fa-adjust"></i> Ночной режим</span>
+        <span
+          ><i class="fas fa-adjust"></i>
+          {{ $localization.state.default.dropdown.nightStyle }}</span
+        >
         <span class="switch"><toggle-switch @onClick="changeTheme" /></span>
       </div>
       <div class="dropdown__menu_item">
-        <span> <i class="fas fa-globe"></i> Язык </span>
-        <span><toggle-switch @onClick="changeLang" /></span>
+        <span>
+          <i class="fas fa-globe"></i>
+          {{ $localization.state.default.dropdown.lang }}
+        </span>
+        <span>
+          <!-- <toggle-switch @onClick="changeLang" />  -->
+          <my-select
+            class="sw-lang"
+            @change="changeOption"
+            :options="options"
+            v-model="modelValueSelect"
+            @onClick="switchLang"
+            >lang</my-select
+          >
+        </span>
       </div>
     </div>
   </div>
@@ -23,11 +41,17 @@ import { Emit, Prop } from "vue-property-decorator";
 })
 export default class Dropdown extends Vue {
   @Prop({ default: false }) stateDropdown!: Boolean;
+  @Prop({ type: String }) modelValueSelect!: {};
+  @Prop({ default: () => [] }) options!: [];
+
   changeTheme() {
     this.$emit("changeTheme");
   }
-  changeLang() {
-    this.$emit("changeLang");
+  @Emit("update:modelValueSelect") changeOption(event: any) {
+    return event.target.value;
+  }
+  switchLang() {
+    this.$emit("switchLang");
   }
 }
 </script>
@@ -41,7 +65,7 @@ export default class Dropdown extends Vue {
   z-index: 90;
   background: rgb(66, 66, 66);
   height: 100vh;
-  min-width: 350px;
+  min-width: 280px;
 }
 
 .dropdown__title {
@@ -64,5 +88,8 @@ export default class Dropdown extends Vue {
 }
 .dropdown__menu_item:hover {
   background: rgb(116, 116, 116);
+}
+.sw-lang {
+  width: 50px;
 }
 </style>

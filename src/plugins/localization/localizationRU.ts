@@ -29,6 +29,11 @@ export default class localizationRU implements Ilocalization {
     title: 'Записать человека',
     add: 'Добавить'
   }
+  dropdown = {
+    menu: 'Меню',
+    nightStyle: 'Ночь',
+    lang: 'Язык'
+  }
 }
 
 

@@ -1,16 +1,15 @@
 <template>
-  <select class="select" :value="modelValue" @change="changeOption">
+  <select class="select" :value="modelValue" @change="changeOption" @click="emitClick" >
     <option disabled selected value="">
-      {{ $localization.state.default.posts.sort }}
+      <slot></slot>
     </option>
-    <option v-for="option in options" :key="option.value" :value="option.value">
+    <option v-for="option in options" :key="option.value" :value="option.value" >
       {{ option.name }}
     </option>
   </select>
 </template>
 
 <script lang="ts">
-import { PropType } from "@vue/runtime-core";
 import { Options, Vue } from "vue-class-component";
 import { Prop } from "vue-property-decorator";
 import Option from "@/types/Option";
@@ -20,24 +19,15 @@ import Option from "@/types/Option";
 })
 export default class MySelect extends Vue {
   @Prop({ type: String }) modelValue!: Option;
-  @Prop({ type: Array as PropType<Option[]>, default: () => [] })
-  options!: Option;
+  @Prop({ default: () => [] }) options!: [];
+
+  emitClick() {
+    this.$emit("onClick");
+  }
 }
 </script>
 
 <style lang='less' scoped>
-/* .select {
-  width: 150px;
-  height: 32px;
-  border-radius: 5px;
-  border: 1px solid #000;
-  margin: 11px 0 0 0;
-  padding-left: 7px;
-  background: rgb(255, 255, 255);
-  font-weight: 500;
-  font-size: 16px;
-} */
-
 :root {
   --select-arrow: var(--select-border);
 }

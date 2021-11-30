@@ -28,5 +28,10 @@ interface Ilocalization {
     title: string,
     add: string
   }
+  dropdown:{
+    menu: string,
+    nightStyle: string,
+    lang: string
+  }
 }
 export default Ilocalization

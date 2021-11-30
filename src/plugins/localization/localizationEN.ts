@@ -29,6 +29,12 @@ export default class localizationEN implements Ilocalization {
     title: 'Add human',
     add: 'Add'
   }
+  dropdown = {
+    menu: 'Menu',
+    nightStyle: 'Night',
+    lang: 'Language'
+  }
 }
+
 
 

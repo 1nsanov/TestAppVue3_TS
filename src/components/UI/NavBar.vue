@@ -1,7 +1,9 @@
 <template>
   <header class="header">
     <div class="header__contanier container">
-      <div class="header__logo" @click="showDropDown"><i class="fab fa-vuejs"></i> Test App </div>
+      <div class="header__logo" @click.passive="showDropDown">
+        <i class="fab fa-vuejs"></i> Test App
+      </div>
       <nav class="header__menu menu">
         <ul class="menu__list">
           <li class="menu__item">
@@ -28,7 +30,13 @@
       </nav>
     </div>
   </header>
-  <dropdown :stateDropdown="stateDropdown" @changeTheme="changeTheme" @changeLang="changeLang"/>
+  <dropdown
+    :stateDropdown="stateDropdown"
+    @changeTheme="changeTheme"
+    v-model:modelValueSelect="valueSelect"
+    @switchLang="switchLang"
+    :options="options"
+  />
 </template>
 
 <script lang="ts">
@@ -41,17 +49,23 @@ import Dropdown from "@/components/Dropdown.vue";
 })
 export default class NavBar extends Vue {
   stateDropdown = false;
-  styles = {};
+  options = [
+    { value: "ru", name: "Ru" },
+    { value: "en", name: "En" },
+  ];
+  valueSelect = 'ru'
   showDropDown() {
     this.stateDropdown = !this.stateDropdown;
   }
   changeTheme() {
     this.$emit("changeTheme");
   }
-  changeLang() {
-    this.$emit("changeLang");
-  }
 
+
+  switchLang() {
+    console.log(this.valueSelect);
+    this.$localization.state.switchLang();
+  }
 }
 </script>
 
@@ -83,6 +97,7 @@ export default class NavBar extends Vue {
 
 .menu__list {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .menu__item:not(:last-child) {
@@ -96,16 +111,25 @@ export default class NavBar extends Vue {
 @media screen and (max-width: 767px) {
   /* стили для средних планшетов - начало */
   .menu__item {
-    font-size: 18px;
-  }
-  .menu__link {
-    line-height: 32.5px;
+    font-size: 24px;
   }
   .header__logo {
-    font-size: 24px;
+    font-size: 26px;
   }
   .menu__item:not(:last-child) {
     margin: 0 20px 0 0;
+  }
+}
+@media screen and (max-width: 479px) {
+  /* стили для телефонов - начало */
+  .menu__item {
+    font-size: 18px;
+  }
+  .header__logo {
+    font-size: 20px;
+  }
+  .menu__item:not(:last-child) {
+    margin: 0 5px 0 0;
   }
 }
 </style>
