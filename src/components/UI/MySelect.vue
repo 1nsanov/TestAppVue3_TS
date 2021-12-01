@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import { Prop } from "vue-property-decorator";
+import { Emit, Prop } from "vue-property-decorator";
 import Option from "@/types/Posts/Option";
 
 @Options({
@@ -21,9 +21,12 @@ export default class MySelect extends Vue {
   emitClick() {
     this.$emit("onClick");
   }
-  changeOption(){
-    this.$emit("changeOption")
+  @Emit("changeOption") changeOption(event: any){
+    return event.target.value
   }
+  // changeOption(){
+  //   this.$emit("changeOption",)
+  // }
 }
 </script>
 

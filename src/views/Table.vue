@@ -2,7 +2,7 @@
   <div class="container">
     <div class="content">
       <people-coord
-        :options="options"
+        :options="optionsPeople"
         v-model:modelValueInput="searchQuery"
         v-model:modelValueSelect="selectedSort"
       />
@@ -112,7 +112,7 @@ export default class Table extends Vue {
   index = 0;
   searchQuery = "";
   selectedSort: OptionTypePeople = "name";
-  options: OptionPeople[] = [
+  optionsPeople: OptionPeople[] = [
     { value: "name", name: "По названию" },
     { value: "position", name: "По Должности" },
     { value: "telnumber", name: "По Ном. тел." },
@@ -134,11 +134,9 @@ export default class Table extends Vue {
 
   created() {
     this.fillPeople();
-    this.saveJsonPeople();
   }
 
   mounted() {
-    this.loadJsonPeople();
     let name = this.$route.query.name?.toString();
     let age = this.$route.query.age
       ? parseInt(this.$route.query.age?.toString())
@@ -157,7 +155,6 @@ export default class Table extends Vue {
       telnumber: telnumber,
     };
     this.createPeople(this.people);
-    this.saveJsonPeople();
   }
 
   fillPeople() {
@@ -172,6 +169,7 @@ export default class Table extends Vue {
       this.peoples.push(this.people);
     }
     this.caclCountPages();
+    this.saveJsonPeople();
   }
   createPeople(people: People) {
     if (!people.name || !people.age || !people.position || !people.telnumber) {
@@ -246,10 +244,15 @@ export default class Table extends Vue {
   }
 
   saveJsonPeople() {
+    // localStorage.setItem("peoples", JSON.stringify(this.peoples));
     this.$json.Save("peoples", this.peoples);
+    console.log("Save");
   }
   loadJsonPeople() {
+    // let stringes = localStorage.getItem("peoples") || "";
+    // this.peoples = JSON.parse(stringes);
     this.peoples = this.$json.Load("peoples");
+    console.log("Load");
   }
 }
 </script>

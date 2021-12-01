@@ -22,12 +22,12 @@
         v-model="people.age"
         minLength="2"
       />
-      <tirscript3-input
+      <!-- <tirscript3-input
         class="input-peoples"
         placeholder="Должность"
         v-model="people.position"
         minLength="3"
-      />
+      /> -->
       <tirscript3-input
         type="tel"
         class="input-peoples"
@@ -35,7 +35,20 @@
         v-model="people.telnumber"
         minLength="13"
       />
-      <my-select :option="option"/>
+      <!-- <div class="position-select">
+        Должность:
+        <my-select
+          class="position-select-options"
+          :options="optionPosition"
+          v-model="selectedPosition"
+          @change="Test"
+        />
+
+      </div> -->
+      <select-position
+        :option="optionPosition"
+        v-model:modelValueSelect="people.position"
+      />
       <tirscript3-button @onClick="createPeople" active>{{
         $localization.state.default.tableForm.add
       }}</tirscript3-button>
@@ -44,22 +57,28 @@
 </template>
 
 <script lang="ts">
+import optionPosition from "@/types/People/optionPosition";
 import People from "@/types/People/People";
+import SelectPosition from "@/components/Table/SelectPosition.vue";
 import { Options, Vue } from "vue-class-component";
 import { Emit, Prop } from "vue-property-decorator";
-import defaultModel from "tirscript3-component-models/src/defaultModel";
-import ListViewItem from "tirscript3-list-view/src/ListViewItem";
 @Options({
+  components: { SelectPosition },
   name: "TableFormRout",
 })
 export default class TableFormRout extends Vue {
   @Prop() peoples!: People[];
-  options: ListViewItem<defaultModel>[] = [];
+
+  optionPosition: optionPosition[] = [
+    { value: "Программист", name: "программист" },
+    { value: "Тестировщик", name: "тестировщик" },
+    { value: "Менеджер", name: "менеджер" },
+  ];
   people: People = {
     id: "",
     name: "",
     age: 18,
-    position: "",
+    position: "Программист",
     telnumber: "373-000-00000",
   };
   @Emit("createPeople") createPeople() {
@@ -74,6 +93,10 @@ export default class TableFormRout extends Vue {
       },
     });
     return Object.assign({}, this.people);
+  }
+  Test() {
+    console.log("change");
+    console.log(this.people.position);
   }
 }
 </script>

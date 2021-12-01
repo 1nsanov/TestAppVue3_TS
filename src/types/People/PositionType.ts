@@ -1,3 +1,3 @@
-type PositionType = 'programmist' | 'tester' | 'manager'
+type PositionType = 'Программист' | 'Тестировщик' | 'Менеджер'
 
 export default PositionType
