@@ -3,7 +3,7 @@ import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import About from '../views/About.vue'
 import Table from '../views/Table.vue'
-import TableFormRout from '../components/TableFormRout.vue'
+import TableFormRout from '../components/Table/TableFormRout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {

@@ -17,15 +17,13 @@
           {{ $localization.state.default.dropdown.lang }}
         </span>
         <span>
-          <!-- <toggle-switch @onClick="changeLang" />  -->
           <my-select
             class="sw-lang"
             @change="changeOption"
             :options="options"
             v-model="modelValueSelect"
             @onClick="switchLang"
-            >lang</my-select
-          >
+          />
         </span>
       </div>
     </div>
@@ -72,7 +70,7 @@ export default class Dropdown extends Vue {
 .dropdown:hover {
   left: 0;
 }
-.flag{
+.flag {
   position: fixed;
   width: 210px;
   height: 75px;

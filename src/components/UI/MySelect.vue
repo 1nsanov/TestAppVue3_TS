@@ -1,8 +1,5 @@
 <template>
   <select class="select" :value="modelValue" @change="changeOption" @click="emitClick" >
-    <option disabled selected value="">
-      <slot></slot>
-    </option>
     <option v-for="option in options" :key="option.value" :value="option.value" >
       {{ option.name }}
     </option>
@@ -12,7 +9,7 @@
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
 import { Prop } from "vue-property-decorator";
-import Option from "@/types/Option";
+import Option from "@/types/Posts/Option";
 
 @Options({
   name: "MySelect",
@@ -23,6 +20,9 @@ export default class MySelect extends Vue {
 
   emitClick() {
     this.$emit("onClick");
+  }
+  changeOption(){
+    this.$emit("changeOption")
   }
 }
 </script>

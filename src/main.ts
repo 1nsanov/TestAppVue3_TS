@@ -4,6 +4,7 @@ import components from './components/UI'
 import router from './router'
 import my from './plugins/myPlugin/plugin.my'
 import localization from './plugins/localization/plugin.localization'
+import jsonPlugin from './plugins/JsonPlugin/plugin.JsonPl'
 
 
 
@@ -14,6 +15,7 @@ import registerComponents from "@/register-components";
 registerComponents(app);
 app.use(my, {});
 app.use(localization, {})
+app.use(jsonPlugin, {})
 
 
 components(app)

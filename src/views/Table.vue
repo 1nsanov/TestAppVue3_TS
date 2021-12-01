@@ -1,12 +1,15 @@
 <template>
-  <div class="about container">
+  <div class="container">
     <div class="content">
-      <div class="title">{{ $localization.state.default.table.title }}</div>
+      <people-coord
+        :options="options"
+        v-model:modelValueInput="searchQuery"
+        v-model:modelValueSelect="selectedSort"
+      />
       <div class="interface-table">
         <my-button class="create-item-table-btn" @click="showDialogCreate()"
           >{{ $localization.state.default.table.create }} 1</my-button
         >
-
         <my-button
           class="create-item-table-btn"
           @click="$router.push('/tableform')"
@@ -22,6 +25,7 @@
         />
         <table-form @changePeople="changePeople" v-else :change="change" />
       </my-dialog>
+
       <div class="table-scroll">
         <div class="table">
           <div class="table__header _cont">
@@ -81,15 +85,18 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import People from "@/types/People";
-import TableForm from "@/components/TableForm.vue";
+import People from "@/types/People/People";
+import TableForm from "@/components/Table/TableForm.vue";
 import Pagination from "@/components/Pagination.vue";
-import TableFormRout from "@/components/TableFormRout.vue";
+import PeopleCoord from "@/components/Table/PeopleCoord.vue";
+import TableFormRout from "@/components/Table/TableFormRout.vue";
 import GeneralPB from "@/types/GeneralPB";
 import { Watch } from "vue-property-decorator";
+import OptionTypePeople from "@/types/People/OptionTypePeople";
+import OptionPeople from "@/types/People/OptionPeople";
 
 @Options({
-  components: { TableForm, Pagination, TableFormRout },
+  components: { TableForm, Pagination, TableFormRout, PeopleCoord },
   name: "Table",
 })
 export default class Table extends Vue {
@@ -98,20 +105,31 @@ export default class Table extends Vue {
     countPages: 0,
     currentPage: 1,
   };
-
   people: People = { id: "", name: "", age: 0, position: "", telnumber: "" };
   peoples: People[] = [];
   dialogVisible = false;
   change = false;
   index = 0;
-
-  localPeople = [];
+  searchQuery = "";
+  selectedSort: OptionTypePeople = "name";
+  options: OptionPeople[] = [
+    { value: "name", name: "По названию" },
+    { value: "position", name: "По Должности" },
+    { value: "telnumber", name: "По Ном. тел." },
+  ];
 
   @Watch("GeneralPB", { deep: true })
   controlCurPage() {
     if (this.GeneralPB.currentPage > this.GeneralPB.countPages) {
       this.GeneralPB.currentPage--;
     }
+    if (this.GeneralPB.currentPage == 0) {
+      this.GeneralPB.currentPage = 1;
+    }
+  }
+
+  updated() {
+    this.caclCountPages();
   }
 
   created() {
@@ -128,6 +146,7 @@ export default class Table extends Vue {
     let position = this.$route.query.position?.toString();
     let telnumber = this.$route.query.telnumber?.toString();
     if (!name || !age || !position || !telnumber) {
+      //alert("Некорректный ввод");
       return;
     }
     this.people = {
@@ -147,7 +166,7 @@ export default class Table extends Vue {
         id: "100" + i,
         name: "Victor " + i,
         age: 16 + i,
-        position: "Раб",
+        position: "Программист",
         telnumber: "373-000-00000",
       };
       this.peoples.push(this.people);
@@ -189,27 +208,48 @@ export default class Table extends Vue {
     this.index = this.peoples.indexOf(people);
   }
 
+  get sortedPeople() {
+    return [...this.peoples].sort((p1: People, p2: People) =>
+      p1[this.selectedSort]?.localeCompare(p2[this.selectedSort])
+    );
+  }
+  filterPosts() {
+    if (this.selectedSort == "position") {
+      return this.sortedPeople.filter((people: People) =>
+        people.position.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else if (this.selectedSort == "telnumber") {
+      return this.sortedPeople.filter((people: People) =>
+        people.telnumber.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      return this.sortedPeople.filter((people: People) =>
+        people.name.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    }
+  }
+
   get slicePeople() {
-    return this.peoples.slice(
+    return this.filterPosts().slice(
       (this.GeneralPB.currentPage - 1) * this.pageSize,
       (this.GeneralPB.currentPage - 1) * this.pageSize + this.pageSize
     );
   }
 
   caclCountPages() {
-    this.GeneralPB.countPages = Math.ceil(this.peoples.length / this.pageSize);
+    this.GeneralPB.countPages = Math.ceil(
+      this.filterPosts().length / this.pageSize
+    );
   }
   changePage(countPage: number) {
     this.GeneralPB.currentPage = countPage;
   }
 
   saveJsonPeople() {
-    localStorage.setItem("peoples", JSON.stringify(this.peoples));
+    this.$json.Save("peoples", this.peoples);
   }
   loadJsonPeople() {
-    let stringes = localStorage.getItem("peoples") || "";
-    this.peoples = JSON.parse(stringes);
-    console.log(stringes);
+    this.peoples = this.$json.Load("peoples");
   }
 }
 </script>
@@ -246,7 +286,6 @@ export default class Table extends Vue {
   border: 6px solid transparent;
   background-clip: content-box;
   height: 70px;
-  // background-image: linear-gradient(to left, #ebebeb, #5dbee4);
   background-color: rgb(255, 255, 255);
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }

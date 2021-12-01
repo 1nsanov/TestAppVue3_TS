@@ -8,18 +8,37 @@
     </div>
     <div class="title">Test component</div>
 
-  
+    <!-- <tirscript-3-tree>Tree 1</tirscript-3-tree>
+    <tirscript-3-tree-element @contextMenu="items"></tirscript-3-tree-element>
 
+    <tirscript-textarea /> -->
   </div>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
+import ListViewItem from "tirscript3-list-view/src/ListViewItem";
+import defaultModel from "tirscript3-component-models/src/defaultModel";
 
 @Options({
   name: "Home",
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  items: ListViewItem<defaultModel>[] = [];
+
+  created() {
+    this.initItems();
+  }
+
+  initItems() {
+    this.items.push(
+      new ListViewItem(new defaultModel(1, "Node 1"), true, false)
+    );
+    this.items.push(
+      new ListViewItem(new defaultModel(2, "Node 2"), false, false)
+    );
+  }
+}
 </script>
 
 

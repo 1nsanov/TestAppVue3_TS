@@ -8,7 +8,6 @@
           v-model:modelValueSelect="selectedSort"
           @showDialog="showDialog"
         />
-
         <my-dialog v-model:show="dialogVisible">
           <post-form @create="createPost" />
         </my-dialog>
@@ -26,12 +25,12 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import PostForm from "@/components/PostForm.vue";
-import OptionType from "@/types/OptionType";
-import Option from "@/types/Option";
-import Post from "@/types/Post";
-import PostsBlock from "@/components/PostsBlock.vue";
-import PostsCoord from "@/components/PostsCoord.vue";
+import PostForm from "@/components/Main/PostForm.vue";
+import OptionType from "@/types/Posts/OptionType";
+import Option from "@/types/Posts/Option";
+import Post from "@/types/Posts/Post";
+import PostsBlock from "@/components/Main/PostsBlock.vue";
+import PostsCoord from "@/components/Main/PostsCoord.vue";
 import GeneralPB from "@/types/GeneralPB";
 import axios from "axios";
 import { Watch } from "vue-property-decorator";
@@ -61,6 +60,13 @@ export default class App extends Vue {
     if (this.GeneralPB.currentPage > this.GeneralPB.countPages) {
       this.GeneralPB.currentPage--;
     }
+    if (this.GeneralPB.currentPage == 0) {
+      this.GeneralPB.currentPage = 1;
+    }
+  }
+
+  updated() {
+    this.caclCountPages();
   }
 
   mounted() {
@@ -108,11 +114,6 @@ export default class App extends Vue {
       post.title.toLowerCase().includes(this.searchQuery.toLowerCase())
     );
   }
-
-  changePage(countPage: number) {
-    this.GeneralPB.currentPage = countPage;
-  }
-
   get slicePost() {
     return this.filterPosts().slice(
       (this.GeneralPB.currentPage - 1) * this.pageSize,
@@ -120,8 +121,14 @@ export default class App extends Vue {
     );
   }
 
+  changePage(countPage: number) {
+    this.GeneralPB.currentPage = countPage;
+  }
+
   caclCountPages() {
-    this.GeneralPB.countPages = Math.ceil(this.posts.length / this.pageSize);
+    this.GeneralPB.countPages = Math.ceil(
+      this.filterPosts().length / this.pageSize
+    );
   }
 }
 </script>
