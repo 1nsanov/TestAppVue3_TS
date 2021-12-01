@@ -137,6 +137,7 @@ export default class Table extends Vue {
   }
 
   mounted() {
+    this.loadJsonPeople();
     let name = this.$route.query.name?.toString();
     let age = this.$route.query.age
       ? parseInt(this.$route.query.age?.toString())
@@ -158,7 +159,7 @@ export default class Table extends Vue {
   }
 
   fillPeople() {
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 25; i++) {
       this.people = {
         id: "100" + i,
         name: "Victor " + i,
@@ -244,13 +245,10 @@ export default class Table extends Vue {
   }
 
   saveJsonPeople() {
-    // localStorage.setItem("peoples", JSON.stringify(this.peoples));
     this.$json.Save("peoples", this.peoples);
     console.log("Save");
   }
   loadJsonPeople() {
-    // let stringes = localStorage.getItem("peoples") || "";
-    // this.peoples = JSON.parse(stringes);
     this.peoples = this.$json.Load("peoples");
     console.log("Load");
   }

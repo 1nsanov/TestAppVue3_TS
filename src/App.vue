@@ -1,8 +1,6 @@
 <template>
   <div class="wrapper" :style="styles">
-    <NavBar
-      @changeTheme="onClickChangeTheme"
-    />
+    <NavBar @changeTheme="onClickChangeTheme" />
     <div class="app">
       <router-view />
     </div>
@@ -143,6 +141,18 @@ body {
   width: 100px;
 }
 
+.back {
+  display: flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: 46px;
+  color: rgb(83, 146, 218);
+}
 // @media screen and (max-width: 991px) {
 //   /* стили для больших планшетов - начало */
 

@@ -35,16 +35,6 @@
         v-model="people.telnumber"
         minLength="13"
       />
-      <!-- <div class="position-select">
-        Должность:
-        <my-select
-          class="position-select-options"
-          :options="optionPosition"
-          v-model="selectedPosition"
-          @change="Test"
-        />
-
-      </div> -->
       <select-position
         :option="optionPosition"
         v-model:modelValueSelect="people.position"
@@ -52,6 +42,10 @@
       <tirscript3-button @onClick="createPeople" active>{{
         $localization.state.default.tableForm.add
       }}</tirscript3-button>
+
+      <my-button class="add-position-btn" @click="$router.push('/addposition')"
+        >Добавить должность</my-button
+      >
     </div>
   </div>
 </template>
@@ -70,9 +64,9 @@ export default class TableFormRout extends Vue {
   @Prop() peoples!: People[];
 
   optionPosition: optionPosition[] = [
-    { value: "Программист", name: "программист" },
-    { value: "Тестировщик", name: "тестировщик" },
-    { value: "Менеджер", name: "менеджер" },
+    { value: "Программист", name: "Программист" },
+    { value: "Тестировщик", name: "Тестировщик" },
+    { value: "Менеджер", name: "Менеджер" },
   ];
   people: People = {
     id: "",
@@ -94,9 +88,32 @@ export default class TableFormRout extends Vue {
     });
     return Object.assign({}, this.people);
   }
-  Test() {
-    console.log("change");
-    console.log(this.people.position);
+
+  mounted() {
+    let value = this.$route.query.value?.toString();
+    let name = this.$route.query.name?.toString();
+    if (!value || !name) {
+      return;
+    }
+    let newPosition: optionPosition = {
+      value: value,
+      name: name,
+    };
+    this.addPosition(newPosition);
+  }
+
+  addPosition(position: optionPosition) {
+    this.optionPosition.push(position);
+    this.saveJsonPosition();
+  }
+
+  saveJsonPosition() {
+    this.$json.Save("position", this.optionPosition);
+    console.log("Save");
+  }
+  loadJsonPosition() {
+    this.optionPosition = this.$json.Load("position");
+    console.log("Load");
   }
 }
 </script>
@@ -117,19 +134,12 @@ export default class TableFormRout extends Vue {
 .create-btn-form {
   font-size: 24px;
 }
-.back {
-  display: flex;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  font-size: 46px;
-  color: rgb(83, 146, 218);
-}
 .jopa {
   width: 300px;
+}
+.add-position-btn {
+  margin: 20px;
+  font-size: 26px;
+  background: rgb(43, 160, 154);
 }
 </style>

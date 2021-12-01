@@ -4,6 +4,7 @@ import Main from '../views/Main.vue'
 import About from '../views/About.vue'
 import Table from '../views/Table.vue'
 import TableFormRout from '../components/Table/TableFormRout.vue'
+import AddPositionRout from '../components/Table/AddPositionRout.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,12 @@ const routes: Array<RouteRecordRaw> = [
     name: 'TableFormRout',
     component: TableFormRout,
     meta: { title: 'tableform' }
+  },
+  {
+    path: '/addposition',
+    name: 'AddPositionRout',
+    component: AddPositionRout,
+    meta: { title: 'add position' }
   },
 ]
 
