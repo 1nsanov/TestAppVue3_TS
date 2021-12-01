@@ -29,6 +29,7 @@
         </span>
       </div>
     </div>
+    <div class="flag"></div>
   </div>
 </template>
 
@@ -56,18 +57,43 @@ export default class Dropdown extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang='less' scoped>
 .dropdown {
   margin-top: 75px;
   position: fixed;
   top: 0;
-  left: 0;
+  left: -270px;
   z-index: 90;
   background: rgb(66, 66, 66);
   height: 100vh;
-  min-width: 280px;
+  min-width: 270px;
+  transition: ease 1s;
 }
-
+.dropdown:hover {
+  left: 0;
+}
+.flag{
+  position: fixed;
+  width: 210px;
+  height: 75px;
+  top: 0;
+  left: 0;
+}
+@media screen and (max-width: 767px) {
+  .flag {
+    width: 180px;
+  }
+}
+@media screen and (max-width: 479px) {
+  .flag {
+    width: 140px;
+  }
+}
+@media screen and (max-width: 393px) {
+  .flag {
+    width: 90px;
+  }
+}
 .dropdown__title {
   width: 100%;
   line-height: 55px;
@@ -91,5 +117,6 @@ export default class Dropdown extends Vue {
 }
 .sw-lang {
   width: 50px;
+  margin: 0;
 }
 </style>

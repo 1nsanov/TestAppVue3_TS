@@ -1,9 +1,8 @@
 <template>
   <header class="header">
     <div class="header__contanier container">
-      <div class="header__logo" @click.passive="showDropDown">
-        <i class="fab fa-vuejs"></i> Test App
-      </div>
+      <div class="header__logo"><i class="fab fa-vuejs"></i> Test App</div>
+      <!-- @click.passive="showDropDown" -->
       <nav class="header__menu menu">
         <ul class="menu__list">
           <li class="menu__item">
@@ -29,14 +28,14 @@
         </ul>
       </nav>
     </div>
+    <dropdown
+      :stateDropdown="stateDropdown"
+      @changeTheme="changeTheme"
+      v-model:modelValueSelect="valueSelect"
+      @switchLang="switchLang"
+      :options="options"
+    />
   </header>
-  <dropdown
-    :stateDropdown="stateDropdown"
-    @changeTheme="changeTheme"
-    v-model:modelValueSelect="valueSelect"
-    @switchLang="switchLang"
-    :options="options"
-  />
 </template>
 
 <script lang="ts">
@@ -48,12 +47,12 @@ import Dropdown from "@/components/Dropdown.vue";
   name: "NavBar",
 })
 export default class NavBar extends Vue {
-  stateDropdown = false;
+  stateDropdown = true;
   options = [
     { value: "ru", name: "Ru" },
     { value: "en", name: "En" },
   ];
-  valueSelect = 'ru'
+  valueSelect = "ru";
   showDropDown() {
     this.stateDropdown = !this.stateDropdown;
   }
@@ -61,10 +60,8 @@ export default class NavBar extends Vue {
     this.$emit("changeTheme");
   }
 
-
   switchLang() {
-    console.log(this.valueSelect);
-    this.$localization.state.switchLang();
+    this.$localization.state.switchLangSelect(this.valueSelect);
   }
 }
 </script>

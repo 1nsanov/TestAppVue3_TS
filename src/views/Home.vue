@@ -6,6 +6,10 @@
       fugit dolor facilis beatae facere assumenda iure consequatur nemo labore
       quibusdam placeat dicta nesciunt rem.
     </div>
+    <div class="title">Test component</div>
+
+  
+
   </div>
 </template>
 
@@ -15,19 +19,13 @@ import { Options, Vue } from "vue-class-component";
 @Options({
   name: "Home",
 })
-export default class Home extends Vue {
-
-}
+export default class Home extends Vue {}
 </script>
 
 
 <style  lang="less" scoped>
-.home {
-  --main-bg-color: brown;
-  &.name-app {
-    font-weight: 700;
-    background: var(--main-bg-color);
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  }
+.name-app {
+  font-weight: 700;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 </style>

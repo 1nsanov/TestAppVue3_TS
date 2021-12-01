@@ -4,8 +4,6 @@ export default class localizationDefault {
   langRu = true;
   langEn = false;
   default = new localizationRU()
-  Ru = 'Русский'
-  En = 'English'
   private Default = 'Русский'
 
   constructor() {
@@ -17,13 +15,29 @@ export default class localizationDefault {
     this.langEn = !this.langEn;
   }
 
+  setLangRu() {
+    this.default = new localizationRU();
+  }
+  setLangEn() {
+    this.default = new localizationEN();
+  }
+
   switchLang() {
     this.switchState();
     if (this.langRu) {
-      this.default = new localizationRU();
+      this.setLangRu()
     } else if (this.langEn) {
-      this.default = new localizationEN();
+      this.setLangEn()
     }
+  }
+
+  switchLangSelect(lang: string) {
+    if (lang == 'ru') {
+      this.setLangRu()
+    }
+    else if (lang == 'en') [
+      this.setLangEn()
+    ]
   }
 }
 

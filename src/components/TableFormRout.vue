@@ -40,7 +40,11 @@
       }}</tirscript3-button>
 
       <div class="jopa">
-        <tirscript3-dropdown :items="langs" placeholder="Язык"/>
+        <tirscript3-dropdown
+          :items="options"
+          @change="switchLang"
+          v-model="valueSelect"
+        />
       </div>
 
       <!-- scroll :height="200" -->
@@ -70,7 +74,7 @@ import ListViewItem from "tirscript3-list-view/src/ListViewItem";
 })
 export default class TableFormRout extends Vue {
   @Prop() peoples!: People[];
-  langs: ListViewItem<defaultModel>[] = [];
+  options: ListViewItem<defaultModel>[] = [];
   people: People = {
     id: "",
     name: "",
@@ -78,6 +82,7 @@ export default class TableFormRout extends Vue {
     position: "",
     telnumber: "373-000-00000",
   };
+  valueSelect = "ru";
   @Emit("createPeople") createPeople() {
     this.people.id = Date.now().toString();
     this.$router.push({
@@ -95,20 +100,15 @@ export default class TableFormRout extends Vue {
     this.initLangs();
   }
   initLangs() {
-    this.langs.push(
-      new ListViewItem(
-        new defaultModel(1, this.$localization.state.Ru),
-        true,
-        false
-      )
+    this.options.push(new ListViewItem(new defaultModel(1, "ru"), true, false));
+    this.options.push(
+      new ListViewItem(new defaultModel(2, "en"), false, false)
     );
-    this.langs.push(
-      new ListViewItem(
-        new defaultModel(2, this.$localization.state.En),
-        false,
-        false
-      )
-    );
+  }
+
+  switchLang() {
+    console.log(this.valueSelect);
+    this.$localization.state.switchLangSelect(this.valueSelect);
   }
 }
 </script>
